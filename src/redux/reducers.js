@@ -45,7 +45,7 @@ const initialState = {
         return {
           ...state,
           loading: false,
-          error: "Error fetching savings data"
+          error: null
         };
      
      
@@ -55,17 +55,20 @@ const initialState = {
             exercise: state.exercise.filter((exercise) => exercise._id !== action.payload),
           
               loading: false,
-              error: "null"
+              error: null
             };
     case "DELETE_FOOD_SUCCESS":
                 return {
                      ...state,
+                     food: state.food.filter((food) => food._id !== action.payload),
+          
                       loading: false,
                       error: "null"
                     };
     case "DELETE_GOAL_SUCCESS":
              return {
                              ...state,
+                             goals: state.goals.filter((goals) => goals._id !== action.payload),
                               loading: false,
                               error: "null"
                             };  
@@ -96,6 +99,20 @@ const initialState = {
                 loading: false,
                 error: null
             }
+            case "ADD_FOOD_SUCCESS":
+            return{
+                ...state,
+                food: [...state.food, action.payload],
+                loading: false,
+                error: null
+            }
+            case "ADD_GOAL_SUCCESS":
+                return{
+                    ...state,
+                    goals: [...state.goals, action.payload],
+                    loading: false,
+                    error: null
+                }
             
             
         case "ADD_EXERCISE_FAILURE":
@@ -104,30 +121,8 @@ const initialState = {
                 loading: false,
                 error: "Error adding  data"
             }
+ 
      
-     
-        case "ADD_ENTRY_FAILURE":
-        return {
-          ...state,
-          loading: false,
-          error: "Error fetching or adding data"
-        };
-      case "ADD_ENTRY_SUCCESS":
-        if (action.payload.entryType === "income") {
-          return {
-            ...state,
-            income: [...state.income, action.payload],
-            loading: false,
-            error: null
-          };
-        } else {
-          return {
-            ...state,
-            expenses: [...state.expenses, action.payload],
-            loading: false,
-            error: null
-          };
-        }
       default:
         return state;
     }

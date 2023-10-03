@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addEntry } from"../redux/actions";
 
 function Dashboard() {
 

@@ -62,33 +62,6 @@ export const fetchExercise = () => async (dispatch) => {
   };
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   export const fetchGoals = () => async (dispatch) => {
     try {
       const response = await fetch(
@@ -101,6 +74,62 @@ export const fetchExercise = () => async (dispatch) => {
       dispatch({ type: "FETCH_GOALS_FAILURE" });
     }
   };
+  
+  export const addGoal = (goalData) => async (dispatch) => {
+    try {
+      const response = await fetch(
+        "https://fitness-tracker-backend.vinlarose.repl.co/goals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", 
+          },
+          
+          body: JSON.stringify(goalData), 
+        }
+      );
+  
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log(data)
+        dispatch({ type: "ADD_GOAL_SUCCESS", payload: data.newGoal });
+      } else {
+        console.error("Error adding goal. Status:", response.status);
+        dispatch({ type: "ADD_GOAL_FAILURE" });
+      }
+    } catch (error) {
+      console.error("Error adding goal:", error);
+      dispatch({ type: "ADD_GOAL_FAILURE" });
+    }
+  };
+  
+  export const deleteGoal = (goalId) => async (dispatch) => {
+    try {
+      const response = await fetch(
+        `https://fitness-tracker-backend.vinlarose.repl.co/goals/${goalId}`,
+        {
+          method: "DELETE",
+        
+        }
+      );
+  
+      if (response.status === 200) {
+        dispatch({ type: "DELETE_EXERCISE_SUCCESS", payload: goalId });
+      } else {
+        console.error("Error deleting exercise. Status:", response.status);
+        dispatch({ type: "DELETE_EXERCISE_FAILURE" });
+      }
+    } catch (error) {
+      console.error("Error deleting exercise:", error);
+      dispatch({ type: "DELETE_EXERCISE_FAILURE" });
+    }
+  };
+  
+  
+  
+  
+  
+  
   
   export const fetchFood = () => async (dispatch) => {
     try {
@@ -116,26 +145,54 @@ export const fetchExercise = () => async (dispatch) => {
     }
   };
   
-  export const addEntry = (entry) => async (dispatch) => {
+  export const addFood = (foodData) => async (dispatch) => {
     try {
       const response = await fetch(
-        "https://redux-example.tanaypratap.repl.co/add-entry",
+        "https://fitness-tracker-backend.vinlarose.repl.co/food",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json", 
           },
-          body: JSON.stringify(entry)
+          
+          body: JSON.stringify(foodData), 
         }
       );
   
-      const data = await response.json();
-      if (data.success === true) {
-        dispatch({ type: "ADD_ENTRY_SUCCESS", payload: data.data });
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log(data)
+        dispatch({ type: "ADD_FOOD_SUCCESS", payload: data.newFoodItem });
+      } else {
+        console.error("Error adding exercise. Status:", response.status);
+        dispatch({ type: "ADD_FOOD_FAILURE" });
       }
     } catch (error) {
-      console.error("Error adding entry:", error);
-      dispatch({ type: "ADD_ENTRY_FAILURE" });
+      console.error("Error adding exercise:", error);
+      dispatch({ type: "ADD_FOOD_FAILURE" });
     }
   };
+  
+  export const deleteFood = (foodId) => async (dispatch) => {
+    try {
+      const response = await fetch(
+        `https://fitness-tracker-backend.vinlarose.repl.co/food/${foodId}`,
+        {
+          method: "DELETE",
+        
+        }
+      );
+  
+      if (response.status === 200) {
+        dispatch({ type: "DELETE_FOOD_SUCCESS", payload: foodId });
+      } else {
+        console.error("Error deleting food. Status:", response.status);
+        dispatch({ type: "DELETE_FOOD_FAILURE" });
+      }
+    } catch (error) {
+      console.error("Error deleting food:", error);
+      dispatch({ type: "DELETE_FOOD_FAILURE" });
+    }
+  };
+  
   
