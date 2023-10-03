@@ -6,7 +6,7 @@ const initialState = {
     error: null
   };
   
-  const financeReducer = (state = initialState, action) => {
+  const fitnessReducer = (state = initialState, action) => {
     switch (action.type) {
       case "FETCH_EXERCISE_SUCCESS":
         return {
@@ -47,7 +47,54 @@ const initialState = {
           loading: false,
           error: "Error fetching savings data"
         };
-      case "ADD_ENTRY_FAILURE":
+     
+     
+    case "DELETE_EXERCISE_SUCCESS":
+        return {
+            ...state,
+            exercise: state.exercise.filter((exercise) => exercise._id !== action.payload),
+          
+              loading: false,
+              error: "null"
+            };
+    case "DELETE_FOOD_SUCCESS":
+                return {
+                     ...state,
+                      loading: false,
+                      error: "null"
+                    };
+    case "DELETE_GOAL_SUCCESS":
+             return {
+                             ...state,
+                              loading: false,
+                              error: "null"
+                            };  
+     
+     case "DELETE_EXERCISE_FAILURE":
+        return {
+          ...state,
+          loading: false,
+          error: "Error deleting  data"
+        };
+      
+     case "DELETE_FOOD_FAILURE":
+        return {
+          ...state,
+          loading: false,
+          error: "Error deleting  data"
+        };
+      case "DELETE_GOAL_FAILURE":
+        return {
+          ...state,
+          loading: false,
+          error: "Error deleting  data"
+        };
+      
+     
+     
+     
+     
+        case "ADD_ENTRY_FAILURE":
         return {
           ...state,
           loading: false,
@@ -74,5 +121,5 @@ const initialState = {
     }
   };
   
-  export default financeReducer;
+  export default fitnessReducer;
   

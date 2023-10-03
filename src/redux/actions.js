@@ -11,6 +11,67 @@ export const fetchExercise = () => async (dispatch) => {
     }
   };
   
+  export const addExercise = () => async (dispatch) => {
+    try {
+      const response = await fetch(
+        "https://fitness-tracker-backend.vinlarose.repl.co/exercises"
+      );
+      const data = await response.json();
+      dispatch({ type: "FETCH_EXERCISE_SUCCESS", payload: data });
+    } catch (error) {
+      console.error("Error fetching EXERCISE data:", error);
+      dispatch({ type: "FETCH_EXERCISE_FAILURE" });
+    }
+  };
+  export const deleteExercise = (exerciseId) => async (dispatch) => {
+    try {
+      const response = await fetch(
+        `https://fitness-tracker-backend.vinlarose.repl.co/exercises/${exerciseId}`,
+        {
+          method: "DELETE",
+        }
+      );
+  
+      if (response.status === 204) {
+        dispatch({ type: "DELETE_EXERCISE_SUCCESS", payload: exerciseId });
+      } else {
+        console.error("Error deleting exercise. Status:", response.status);
+        dispatch({ type: "DELETE_EXERCISE_FAILURE" });
+      }
+    } catch (error) {
+      console.error("Error deleting exercise:", error);
+      dispatch({ type: "DELETE_EXERCISE_FAILURE" });
+    }
+  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   export const fetchGoals = () => async (dispatch) => {
     try {
       const response = await fetch(
@@ -20,7 +81,7 @@ export const fetchExercise = () => async (dispatch) => {
       dispatch({ type: "FETCH_GOALS_SUCCESS", payload: data });
     } catch (error) {
       console.error("Error fetching savings data:", error);
-      dispatch({ type: "FETCH_GOAL_FAILURE" });
+      dispatch({ type: "FETCH_GOALS_FAILURE" });
     }
   };
   
