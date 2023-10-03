@@ -19,10 +19,12 @@ function Exercise() {
       ...newExercise,
       [name]: value,
     });
+    console.log(newExercise)
   };
 
   const handleAddExercise = () => {
-    dispatch(addExercise(newExercise)); // Dispatch the addExercise action
+    console.log(newExercise)
+    dispatch(addExercise(newExercise)); 
     setNewExercise({
       exerciseName: "",
       durationMinutes: 0,
@@ -77,8 +79,8 @@ function Exercise() {
           </tr>
         </thead>
         <tbody>
-          {exercises.map((exercise) => (
-            <tr key={exercise._id}>
+          {exercises.map((exercise,index) => (
+            <tr key={index}>
               <td>{exercise.exerciseName}</td>
               <td>{exercise.durationMinutes}</td>
               <td>{exercise.caloriesBurned}</td>

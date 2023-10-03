@@ -69,14 +69,12 @@ const initialState = {
                               loading: false,
                               error: "null"
                             };  
-     
      case "DELETE_EXERCISE_FAILURE":
         return {
           ...state,
           loading: false,
           error: "Error deleting  data"
-        };
-      
+        }; 
      case "DELETE_FOOD_FAILURE":
         return {
           ...state,
@@ -91,7 +89,21 @@ const initialState = {
         };
       
      
-     
+        case "ADD_EXERCISE_SUCCESS":
+            return{
+                ...state,
+                exercise: [...state.exercise, action.payload],
+                loading: false,
+                error: null
+            }
+            
+            
+        case "ADD_EXERCISE_FAILURE":
+            return{
+                ...state,
+                loading: false,
+                error: "Error adding  data"
+            }
      
      
         case "ADD_ENTRY_FAILURE":

@@ -11,28 +11,45 @@ export const fetchExercise = () => async (dispatch) => {
     }
   };
   
-  export const addExercise = () => async (dispatch) => {
+  export const addExercise = (exerciseData) => async (dispatch) => {
     try {
       const response = await fetch(
-        "https://fitness-tracker-backend.vinlarose.repl.co/exercises"
+        "https://fitness-tracker-backend.vinlarose.repl.co/exercises",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", 
+          },
+          
+          body: JSON.stringify(exerciseData), 
+        }
       );
-      const data = await response.json();
-      dispatch({ type: "FETCH_EXERCISE_SUCCESS", payload: data });
+  
+      if (response.status === 201) {
+        const data = await response.json();
+        console.log(data)
+        dispatch({ type: "ADD_EXERCISE_SUCCESS", payload: data.newExercise });
+      } else {
+        console.error("Error adding exercise. Status:", response.status);
+        dispatch({ type: "ADD_EXERCISE_FAILURE" });
+      }
     } catch (error) {
-      console.error("Error fetching EXERCISE data:", error);
-      dispatch({ type: "FETCH_EXERCISE_FAILURE" });
+      console.error("Error adding exercise:", error);
+      dispatch({ type: "ADD_EXERCISE_FAILURE" });
     }
   };
+  
   export const deleteExercise = (exerciseId) => async (dispatch) => {
     try {
       const response = await fetch(
         `https://fitness-tracker-backend.vinlarose.repl.co/exercises/${exerciseId}`,
         {
           method: "DELETE",
+        
         }
       );
   
-      if (response.status === 204) {
+      if (response.status === 200) {
         dispatch({ type: "DELETE_EXERCISE_SUCCESS", payload: exerciseId });
       } else {
         console.error("Error deleting exercise. Status:", response.status);
