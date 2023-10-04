@@ -88,13 +88,13 @@ export const fetchExercise = () => async (dispatch) => {
           body: JSON.stringify(goalData), 
         }
       );
-  
+  console.log(response)
       if (response.status === 201) {
         const data = await response.json();
         console.log(data)
         dispatch({ type: "ADD_GOAL_SUCCESS", payload: data.newGoal });
       } else {
-        console.error("Error adding goal. Status:", response.status);
+        console.error("Error adding goal. " ,  response.status);
         dispatch({ type: "ADD_GOAL_FAILURE" });
       }
     } catch (error) {
@@ -114,14 +114,14 @@ export const fetchExercise = () => async (dispatch) => {
       );
   
       if (response.status === 200) {
-        dispatch({ type: "DELETE_EXERCISE_SUCCESS", payload: goalId });
+        dispatch({ type: "DELETE_GOAL_SUCCESS", payload: goalId });
       } else {
         console.error("Error deleting exercise. Status:", response.status);
-        dispatch({ type: "DELETE_EXERCISE_FAILURE" });
+        dispatch({ type: "DELETE_GOAL_FAILURE" });
       }
     } catch (error) {
       console.error("Error deleting exercise:", error);
-      dispatch({ type: "DELETE_EXERCISE_FAILURE" });
+      dispatch({ type: "DELETE_GOAL_FAILURE" });
     }
   };
   

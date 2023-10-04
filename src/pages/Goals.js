@@ -10,10 +10,10 @@ function Goals() {
 
   const [newGoal, setNewGoal] = useState({
     goalName: "",
-    goalDescription: 0,
-    targetDate: 0,
+    goalDescription: "", 
+    targetDate: "",
     targetCaloriesValue: 0,
-    status:0,
+    status: "",
   });
 
   const handleChange = (e) => {
@@ -30,10 +30,10 @@ function Goals() {
     dispatch(addGoal(newGoal)); 
     setNewGoal({
         goalName: "",
-    goalDescription: 0,
-    targetDate: 0,
-    targetCaloriesValue: 0,
-    status:0,
+        goalDescription: "", 
+        targetDate: "",
+        targetCaloriesValue: 0,
+        status: "",
     });
   };
 
@@ -61,10 +61,17 @@ function Goals() {
           onChange={handleChange}
         />
         <input
+          type="text"
+          name="goalDescription"
+          placeholder="Goal Description"
+          value={newGoal.goalDescription}
+          onChange={handleChange}
+        />
+        <input
           type="date"
           name="targetDate"
-          placeholder=""
-          value={newGoal.proteinGrams}
+          placeholder="Date"
+          value={newGoal.targetDate}
           onChange={handleChange}
         />
         <input
@@ -72,6 +79,13 @@ function Goals() {
           name="targetCaloriesValue"
           placeholder="Calories "
           value={newGoal.targetCaloriesValue}
+          onChange={handleChange}
+        />
+        <input
+          type="string"
+          name="status"
+          placeholder="Status "
+          value={newGoal.status}
           onChange={handleChange}
         />
       
